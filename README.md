@@ -55,7 +55,7 @@ export default {
 #### 如何运行🏃
 > 注： 需要你的电脑上有nodejs环境以及yarn，如何安装 [NodeJs安装相关](https://nodejs.org/en/) [yarn安装相关](https://yarnpkg.com/)
 
-* 打开命令行，并在项目根路径依次运行以下代码。
+* 打开命令行，并在项目根路径依次运行以下指令。
 ```shell
 yarn # 安装依赖
 yarn go # 运行脚本
