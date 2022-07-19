@@ -13,11 +13,9 @@
 
 ---
 ![宿舍页面](https://lao-lan-go.oss-cn-beijing.aliyuncs.com/blog/CA0D2CB1-8ECC-4F52-AD93-398B24592877.png)
-
 ---
 
 ![右键](https://lao-lan-go.oss-cn-beijing.aliyuncs.com/blog/9F368D3A-9A52-4946-9B78-3CB06EEDEDC9.png)
-
 ---
 - 打🐎处就是数字id，copy一下
 ![开发界面](https://lao-lan-go.oss-cn-beijing.aliyuncs.com/blog/D38661C5-736D-465A-B352-B6D790FFC3D0.png)
