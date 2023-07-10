@@ -1,13 +1,13 @@
 import got from 'got'
-import { BedInfo, BedId } from './type'
-import config from '../room.config'
+import { BedInfo, BedId, NessInfo } from './type'
 import { headers as HEADERS } from './header'
 import { register } from './login'
 
 const CHECK_ROOM = "https://hq.uestc.edu.cn/dormitory/dormitoryOnlineChooseRoom/getNewBedList"
 const POST_URL_CHOOSEROOM = "https://hq.uestc.edu.cn/dormitory/dormitoryOnlineChooseRoom/studentChooseBed"
 
-const cookies = config.persons.map(item => {
+// 和下面checkRoom类似的修改方式
+const cookies = (config: NessInfo) => config.persons.map(item => {
     const cookies = []
     for (const [key, value] of Object.entries(item.cookie)) {
         cookies.push(`${key}=${value}`)
@@ -18,7 +18,9 @@ const cookies = config.persons.map(item => {
     }
 })
 
-const checkRoom = async (roomId: number): Promise<{
+
+// 需要用新的config来替代老的config，考虑直接在外面加一层调用，用于传入config设置，相当于设置一个闭包用于全局变量
+const checkRoom = (config: NessInfo) => async (roomId: number): Promise<{
   isNull: boolean,
   bed: Array<BedId>
 }> => {
@@ -26,7 +28,7 @@ const checkRoom = async (roomId: number): Promise<{
       method: 'post',
       headers: {
         ...HEADERS,
-        Cookie: cookies.find((cookie) => cookie.name === item.name).cookie
+        Cookie: cookies(config).find((cookie) => cookie.name === item.name).cookie
       },
       form: {
         "room_id": roomId    
@@ -72,12 +74,15 @@ const checkRoom = async (roomId: number): Promise<{
 }
 
 
-const main = async () => {
-  const res = await register()
+
+export const main = async (globalData: NessInfo) => {
+  const res = await register(globalData.persons);
   if (res.hasRegister) {
-    for (let house of config.houses) {
+    for (let house of globalData.houses) {
       console.log(`正在抢房 ${house.name} 号`)
-      const data = await checkRoom(house.id)
+      // 先注册config，使得现在的注册后的config函数和之前的使用全局Config的函数一样
+      const checkRoomConfig = checkRoom(globalData);
+      const data = await checkRoomConfig(house.id)
       // 空的，进行选房请求
       if (data.isNull) {
         console.log('房源为空，开始抢房')
@@ -86,7 +91,7 @@ const main = async () => {
             method: 'post',
             headers: {
               ...HEADERS,
-              Cookie: cookies.find(cookie => cookie.name === item.name).cookie
+              Cookie: cookies(globalData).find(cookie => cookie.name === item.name).cookie
             },
             form: {
               "bed_id": item.bed_id,
@@ -119,4 +124,4 @@ const main = async () => {
   
 }
 
-main()
+

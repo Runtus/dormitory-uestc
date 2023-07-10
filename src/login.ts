@@ -1,9 +1,11 @@
 import got from 'got'
 import config from '../room.config'
 import { headers } from './header'
+import type { NessInfo } from './type'
 
 const LOGIN_HOST = "https://hq.uestc.edu.cn/dormitory/dormitoryOnlineChooseRoom/dormitoryWebLogin"
 
+// TODO vite-test文件设置
 
 const login = async (act: string, psw: string, cookie: string, randomCode?: string): Promise<{
     type: number,
@@ -40,8 +42,8 @@ const login = async (act: string, psw: string, cookie: string, randomCode?: stri
     })
 }
 
-export const register = async () => {
-    const logins_promises = config.persons.map(item => login(item.act, item.psw, item.cookie.JSESSIONID))
+export const register = async (persons: NessInfo["persons"]) => {
+    const logins_promises = persons.map(item => login(item.act, item.psw, item.cookie.JSESSIONID))
     return Promise.all(logins_promises).then(res => {
         console.log(res)
         if (res.every(item => item.login) && res.every(item => item.type === 1)) {
