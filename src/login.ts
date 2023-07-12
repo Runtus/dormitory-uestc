@@ -1,5 +1,4 @@
 import got from 'got'
-import config from '../room.config'
 import { headers } from './header'
 import type { NessInfo } from './type'
 
