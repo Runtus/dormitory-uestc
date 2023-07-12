@@ -1,19 +1,12 @@
 export default {
     persons: [{
         "name": "xxx1", 
-        "act": "abcdefg", 
-        "psw": "114514", 
+        "act": "202321081229", 
+        "psw": "300616*hyl", 
         "cookie": {
-            "JSESSIONID": "67BA5A3AA28F701F31C7AAF3A12096F1", 
+            "JSESSIONID": "B99FE730AC61DAE8EA13D8166FF0A78F", 
         }
-    }, {
-        "name": "xxx2",
-        "act": "abcdefffff",
-        "psw": "1919810",
-        "cookie": {
-            "JSESSIONID": "C281CAAEF220C15F892E6EBDAC9DFF53"
-        }
-        }],
+    }],
     houses: [
         {
             id: 114514,
