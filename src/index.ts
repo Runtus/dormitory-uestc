@@ -106,10 +106,22 @@ export const main = async (globalData: NessInfo) => {
         console.log(result)
         if (result.every(item => item.type === 0)) {
           console.log(`恭喜！抢房成功，房号为:${house.name}`)
+          return {
+            status: true,
+            info: "success"
+          };
         } else if (result.every(item => item.type === 1)){
           console.log(`你们貌似抢过房了`)
+          return {
+            status: false,
+            info: "你们貌似抢过房了"
+          }
         } else {
           console.log(`疑似撞车，请登录检查`)
+          return {
+            status: false,
+            info: "疑似撞车，请登录检查"
+          }
         }
         break;
       } else {
@@ -118,8 +130,16 @@ export const main = async (globalData: NessInfo) => {
       }
     }
     console.log('你预定的房间已经没有空位了，请重新进行配置')
+    return {
+      status: false,
+      info: '你预定的房间已经没有空位了，请重新进行配置'
+    }
   } else {
     console.log('loginID没有注册成功，请重复尝试')
+    return {
+      status: false,
+      info: 'loginID没有注册成功，请重复尝试'
+    }
   }
   
 }

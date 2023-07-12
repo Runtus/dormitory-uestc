@@ -7,10 +7,12 @@
     "dev": "nodemon --exec ts-node -r tsconfig-paths/register src/index.ts",
     "format": "prettier --write .",
     "build": "yarn etsc --config=etsc.config.js",
-    "go": "ts-node ./src/index.ts"
+    "go": "ts-node ./src/index.ts",
+    "test": "vitest"
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "express": "^4.18.2",
     "got": "^11.0",
     "koa": "^2.13.4",
     "qs": "^6.11.0",
@@ -28,6 +30,7 @@
     "nodemon": "^2.0.15",
     "prettier": "2.5.1",
     "ts-node": "^10.4.0",
-    "tsconfig-paths": "^3.12.0"
+    "tsconfig-paths": "^3.12.0",
+    "vitest": "^0.33.0"
   }
 }

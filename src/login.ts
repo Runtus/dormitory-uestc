@@ -14,8 +14,9 @@ const login = async (act: string, psw: string, cookie: string, randomCode?: stri
     randomCode ?: string
 }> => {
     const password = Buffer.from(psw).toString('base64');
+    console.log(act, psw, cookie)
     return got(LOGIN_HOST, {
-        method: 'post',
+        method: 'POST',
         form: {
             username: act,
             password,
@@ -32,20 +33,20 @@ const login = async (act: string, psw: string, cookie: string, randomCode?: stri
         type: number,
         login: boolean,
         ca: boolean,
-        randomCode ?: string
+        // randomCode ?: string
     }>().then(res => {
-        if (res.randomCode) {
-            return login(act, psw, cookie, res.randomCode)
-        } else {
+        // if (res.randomCode) {
+        //     return login(act, psw, cookie, res.randomCode)
+        // } else 
             return res
-        }
+        
     })
 }
 
 export const register = async (persons: NessInfo["persons"]) => {
     const logins_promises = persons.map(item => login(item.act, item.psw, item.cookie.JSESSIONID))
     return Promise.all(logins_promises).then(res => {
-        console.log(res)
+        console.log("已经完成", res)
         if (res.every(item => item.login) && res.every(item => item.type === 1)) {
             return {
                 hasRegister: true
