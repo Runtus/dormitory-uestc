@@ -66,3 +66,4 @@ yarn go # 运行脚本
 * 因为泥电的鉴权是在本地生成session后，在登录的时候一起发送给后端服务器，后端服务器把你的账号信息和该session进行绑定后再发送回来，后续的一些选房操作都是通过该绑定的session来完成的，所以你需要提前在**登录界面**获取到一个**新session**然后复制到上述的配置文件中，具体操作看参考下面的截图。
 * **建议不要直接用配置文件的session，因为你的session有可能会被别人注册而覆盖掉。**
 ![session获取](https://lao-lan-go.oss-cn-beijing.aliyuncs.com/blog/597A1AB6-7B71-4052-8410-631DAAEE949C.png)
+* **注意**：sessionId最好在网站开抢之前获取，否则会遇到session过期的问题（具体的过期时间不清楚，但可以清楚的是前一天的session会过期）
