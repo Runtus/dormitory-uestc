@@ -76,3 +76,8 @@ yarn go # 挂载脚本
 * **建议不要直接用配置文件的session，因为你的session有可能会被别人注册而覆盖掉。**
 ![session获取](https://lao-lan-go.oss-cn-beijing.aliyuncs.com/blog/597A1AB6-7B71-4052-8410-631DAAEE949C.png)
 * **注意**：sessionId最好在网站开抢之前获取，否则会遇到session过期的问题（具体的过期时间不清楚，但可以清楚的是前一天的session会过期）
+
+
+### TODO
+1. 增加`room.config.local.ts`文件，用于本地配置读取，`.gitignore`里面设置对应的文件。
+2. 
